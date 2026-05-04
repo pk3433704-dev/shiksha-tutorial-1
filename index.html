@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shiksha Tutorial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg,#0b3d91,#ffc107);
+    color: white;
+}
+
+/* NAV */
+nav {
+    position: sticky;
+    top: 0;
+    background: rgba(0,0,0,0.6);
+    text-align: center;
+    padding: 10px;
+}
+nav a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+/* HERO */
+.hero {
+    background: url('https://images.unsplash.com/photo-1588072432836-e10032774350') center/cover;
+    text-align: center;
+    padding: 100px 20px;
+}
+.hero h1 {
+    font-size: 40px;
+}
+
+/* GLASS */
+.glass {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    margin: 20px;
+    padding: 20px;
+}
+
+/* CARDS */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.card {
+    width: 220px;
+    margin: 10px;
+    text-align: center;
+}
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* SLIDER */
+.slider img {
+    width: 80%;
+    height: 300px;
+    border-radius: 10px;
+}
+
+/* GALLERY */
+.gallery img {
+    width: 200px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+/* FORM */
+input, textarea {
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+/* WHATSAPP */
+.whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    padding: 15px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#courses">Courses</a>
+    <a href="#gallery">Gallery</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Shiksha Tutorial</h1>
+    <p>Padhai Nahi, Samajh Zaroori Hai!</p>
+</section>
+
+<!-- COURSES -->
+<section id="courses" class="glass">
+<h2 align="center">Our Courses</h2>
+<div class="container">
+
+<div class="card glass">
+<img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb">
+<p>Maths</p>
+</div>
+
+<div class="card glass">
+<img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d">
+<p>Science</p>
+</div>
+
+<div class="card glass">
+<img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f">
+<p>English</p>
+</div>
+
+<div class="card glass">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
+<p>Computer</p>
+</div>
+
+</div>
+</section>
+
+<!-- SLIDER -->
+<section class="glass slider" align="center">
+<h2>Class Highlights</h2>
+<img id="slide" src="https://images.unsplash.com/photo-1584697964403-7e4cbaaa4a84">
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="glass">
+<h2>Gallery</h2>
+
+<input type="file" id="imgInput" multiple>
+<button onclick="addImages()">Upload</button>
+
+<div class="gallery" id="galleryBox">
+
+<img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
+<img src="https://images.unsplash.com/photo-1606326608690-4e0281b1e588">
+<img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178">
+
+</div>
+</section>
+
+<!-- FORM -->
+<section class="glass">
+<h2>Enquiry Form</h2>
+
+<form onsubmit="sendWhatsApp(event)">
+<input type="text" id="name" placeholder="Name" required>
+<input type="text" id="phone" placeholder="Phone" required>
+<textarea id="msg" placeholder="Message"></textarea>
+<button>Send</button>
+</form>
+
+</section>
+
+<footer>
+<p>📞 8719921724 | 📍 Prayagraj</p>
+</footer>
+
+<a href="https://wa.me/918719921724" class="whatsapp">💬</a>
+
+<script>
+/* SLIDER */
+let imgs = [
+"https://images.unsplash.com/photo-1584697964403-7e4cbaaa4a84",
+"https://images.unsplash.com/photo-1523580846011-d3a5bc25702b",
+"https://images.unsplash.com/photo-1509062522246-3755977927d7"
+];
+let i = 0;
+setInterval(()=>{
+document.getElementById("slide").src = imgs[i];
+i = (i+1)%imgs.length;
+},2000);
+
+/* GALLERY UPLOAD */
+function addImages(){
+let input = document.getElementById("imgInput");
+let box = document.getElementById("galleryBox");
+
+for(let file of input.files){
+let img = document.createElement("img");
+img.src = URL.createObjectURL(file);
+box.appendChild(img);
+}
+}
+
+/* WHATSAPP */
+function sendWhatsApp(e){
+e.preventDefault();
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let msg = document.getElementById("msg").value;
+
+let url="https://wa.me/918719921724?text="
++"Name:"+name+"%0aPhone:"+phone+"%0aMsg:"+msg;
+
+window.open(url,"_blank");
+}
+</script>
+
+</body>
+</html>
